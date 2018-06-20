@@ -10,46 +10,91 @@ import java.util.List;
 *类名和方法不能修改
  */
 public class Schedule {
+    
+    private TaskInfo taskInfo=new TaskInfo();
 
 
     public int init() {
-        // TODO 方法未实现12
-        return ReturnCodeKeys.E000;
+        
+        unregisterNode(taskInfo.getNodeId());
+        
+        deleteTask(taskInfo.getTaskId());
+        
+        return ReturnCodeKeys.E001;
     }
 
 
     public int registerNode(int nodeId) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if (nodeId<=0)
+        {
+            return ReturnCodeKeys.E004;
+        }
+        
+        if (nodeId==taskInfo.getNodeId())
+        {
+            return ReturnCodeKeys.E005;
+        }
+        taskInfo.setNodeId(nodeId);
+        return ReturnCodeKeys.E003;
     }
 
     public int unregisterNode(int nodeId) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if (nodeId<=0)
+        {
+            return ReturnCodeKeys.E004;
+        }
+        if (nodeId!=taskInfo.getNodeId())
+        {
+            return ReturnCodeKeys.E007;
+        }
+        taskInfo.setNodeId(0);
+        return ReturnCodeKeys.E006;
     }
 
 
     public int addTask(int taskId, int consumption) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if (taskId<=0)
+        {
+            return ReturnCodeKeys.E009;
+        }
+        if (taskId==taskInfo.getTaskId())
+        {
+            return ReturnCodeKeys.E010;
+        }
+        taskInfo.setTaskId(taskId);
+        return ReturnCodeKeys.E008;
     }
 
 
     public int deleteTask(int taskId) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if (taskId<=0)
+        {
+            return ReturnCodeKeys.E009;
+        }
+        if (taskId!=taskInfo.getTaskId())
+        {
+            return ReturnCodeKeys.E012;
+        }
+        taskInfo.setTaskId(0);
+        return ReturnCodeKeys.E011;
     }
 
 
     public int scheduleTask(int threshold) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if (threshold <=0)
+        {
+            return ReturnCodeKeys.E002;  
+        }
+        return ReturnCodeKeys.E013;
     }
 
 
     public int queryTaskStatus(List<TaskInfo> tasks) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if (tasks.equals(null))
+        {
+            return ReturnCodeKeys.E016;
+        }
+        return ReturnCodeKeys.E015;
     }
 
 }
